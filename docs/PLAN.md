@@ -227,15 +227,20 @@ Steps as originally specified, with `{{BUCKET_NAME}}` = `aizal-portfolio-site` a
 
 | Step | Action | Expected result |
 |------|--------|-----------------|
-| 6.1 | Upload a first build: `npm run build:prod` then `aws s3 sync dist/portfolio/browser/ s3://{{BUCKET_NAME}}/ --delete` | `upload: …` lines, then `aws s3 ls s3://{{BUCKET_NAME}}/` shows `index.html` |
+| 6.1 | Upload a first build: `npm run build:prod` then the **three-pass** sync in TRD §13.3 — pass 1 immutable (hashed assets only), pass 2 short TTL (`assets/*`, `robots.txt`, `favicon.ico`), pass 3 `must-revalidate` (HTML) | `upload: …` lines, then `aws s3 ls s3://aizal-portfolio-site/` shows `index.html` |
+
 | 6.2 | Create the CloudFront distribution (console is easiest): origin = the S3 **REST** endpoint, **Origin access control** = new OAC, viewer protocol = *Redirect HTTP to HTTPS*, allowed methods `GET, HEAD`, compress objects = Yes, default root object = `index.html`, price class = `PriceClass_100` | Distribution state → `Deployed` (~3–5 min) |
 | 6.3 | Paste the bucket policy CloudFront suggests (it grants `s3:GetObject` to `cloudfront.amazonaws.com` for this distribution only) | Bucket stays fully private; `https://<d-id>.cloudfront.net/` returns your page |
 | 6.4 | Response headers policy: HSTS, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, CSP (per TRD §12) | `curl -I https://<d-id>.cloudfront.net/` shows every header |
 | 6.5 | Custom error responses: **403 → `/404/index.html`, response code 404**; **404 → `/404/index.html`, response code 404** | A bad path renders the 404 page and returns `HTTP/2 404` |
-| 6.6 | Verify caching: a hashed JS file vs `index.html` | JS → `max-age=31536000, immutable`; HTML → `max-age=0, must-revalidate` |
+| 6.6 | Verify caching: hashed JS, `index.html`, **and the résumé PDF** | JS → `max-age=31536000, immutable`; HTML → `max-age=0, must-revalidate`; **PDF → `max-age=3600, must-revalidate`** |
 | 6.7 | **Explore the free tier while you're here** — note the CloudFront metrics view and where invalidation history lives. This is study material for the SAA exam. | You can describe the request flow viewer → CloudFront → OAC → S3 unaided |
 
 **No ACM certificate and no Route 53 in v1** — CloudFront serves HTTPS on its own `*.cloudfront.net` domain for free.
+
+**Verified after the first upload:** 11 objects, 1.28 MiB, correct `Content-Type` on every object, `max-age=0,must-revalidate` on all HTML, `immutable` on the hashed JS/CSS.
+
+> **Defect caught here, and fixed.** The original two-pass sync gave `assets/aizal-resume.pdf` `immutable` for a year. The résumé URL carries **no content hash**, so an updated résumé would have been invisible to anyone who had already visited — for up to a year, in both browser and CloudFront caches. That is the one file on a job-search site that must never go stale. The deploy script now separates *hashed* filenames (safe to make immutable) from *stable* filenames whose content changes (short TTL). Found by inspecting object headers with `head-object`; `aws s3 ls` shows nothing about caching.
 
 ## Phase 7 — Deploy automation
 

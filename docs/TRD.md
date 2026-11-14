@@ -465,9 +465,10 @@ Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'
 `scripts/deploy.sh` (git-bash), in this **exact order** — assets first, HTML second, invalidate last — so HTML never references an asset that has not uploaded:
 
 1. **Guard:** assert `dist/portfolio/browser/index.html` exists, else exit non-zero with a clear message. (Catches the classic `dist/portfolio` mistake.)
-2. `aws s3 sync dist/portfolio/browser/ s3://{{BUCKET_NAME}}/ --delete --exclude "*.html" --cache-control "public,max-age=31536000,immutable"`
-3. `aws s3 sync dist/portfolio/browser/ s3://{{BUCKET_NAME}}/ --exclude "*" --include "*.html" --cache-control "public,max-age=0,must-revalidate"`
-4. `aws cloudfront create-invalidation --distribution-id {{DISTRIBUTION_ID}} --paths "/" "/index.html" "/index.csr.html" "/404/*" "/sitemap.xml" "/robots.txt"`
+2. `aws s3 sync dist/portfolio/browser/ s3://aizal-portfolio-site/ --delete --exclude "*.html" --exclude "assets/*" --exclude "robots.txt" --exclude "favicon.ico" --cache-control "public,max-age=31536000,immutable"` — **only content-hashed filenames**, where `immutable` is safe because changing the content changes the filename
+3. `aws s3 sync dist/portfolio/browser/ s3://aizal-portfolio-site/ --exclude "*" --include "assets/*" --include "robots.txt" --include "favicon.ico" --cache-control "public,max-age=3600,must-revalidate"` — **stable URLs whose content changes.** `immutable` here would serve a stale résumé for a year; this was a real defect in an earlier version of this script, caught by inspecting object headers rather than trusting the upload
+4. `aws s3 sync dist/portfolio/browser/ s3://aizal-portfolio-site/ --exclude "*" --include "*.html" --cache-control "public,max-age=0,must-revalidate"` — HTML must revalidate so a deploy is visible immediately
+5. `aws cloudfront create-invalidation --distribution-id {{DISTRIBUTION_ID}} --paths "/" "/index.html" "/index.csr.html" "/404/*" "/sitemap.xml" "/robots.txt"`
 
 Hashed assets are immutable and never need invalidating. Configuration comes from a gitignored `.env.deploy`: `BUCKET_NAME`, `DISTRIBUTION_ID`, `AWS_REGION`.
 
