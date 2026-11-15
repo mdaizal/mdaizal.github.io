@@ -99,19 +99,4 @@ export const PROJECTS: readonly Project[] = [
     tags: ['C#', 'REST APIs', 'ASP.NET', 'Integration', 'Legacy modernisation'],
     domain: 'dotnet',
   },
-  {
-    slug: 'cloud-lab',
-    title: 'cloud-lab',
-    period: 'ongoing',
-    summary:
-      'The public working notebook for the AWS learning path — labs, notes and small experiments, built toward the SAA certification.',
-    bullets: [
-      'Hands-on AWS practice rather than course-following alone.',
-      'Feeds directly into the Solutions Architect – Associate study plan, targeted for January 2027.',
-      'Deliberately public so the learning path is verifiable, not just claimed.',
-    ],
-    tags: ['AWS', 'Learning in public', 'Notes', 'Labs'],
-    domain: 'aws',
-    repoUrl: 'https://github.com/mdaizal/cloud-lab',
-  },
 ];

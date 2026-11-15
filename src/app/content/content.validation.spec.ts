@@ -66,8 +66,8 @@ describe('content', () => {
   });
 
   describe('rule 3/4 — projects', () => {
-    it('has at least 7 projects', () => {
-      expect(PROJECTS.length).toBeGreaterThanOrEqual(7);
+    it('has at least 6 projects', () => {
+      expect(PROJECTS.length).toBeGreaterThanOrEqual(6);
     });
 
     it('includes this site as an AWS project with a repo link', () => {

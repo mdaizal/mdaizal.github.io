@@ -242,7 +242,7 @@ export interface Cert { name: string; issuer: string; status: 'earned' | 'in-pro
 
 1. Fail if any string field contains `{{` or `TODO`.
 2. Fail if `experience.length < 6` — the six entries are what evidence both the 5+ years and the 19 years (PRD §2).
-3. Fail if `projects.length < 7`.
+3. Fail if `projects.length < 6`.
 4. Fail if no project has `domain === 'aws'`.
 5. Fail if `profile.currently.length !== 3`.
 6. Fail if `profile.availability` is empty — availability is the highest-value line on the page (PRD §1).
@@ -371,7 +371,7 @@ Meta must be set through Angular's `Title` / `Meta` services so it renders **dur
 
 | Level | Tool | Scope | Gate |
 |-------|------|-------|------|
-| Unit | Vitest (`npm test`) | Validator accepts real data and rejects placeholders/missing entries; `SeoService` sets meta; obfuscation helper; every shared primitive renders; the timeline renders all 6 entries. Plus `pages/home/home.spec.ts` — a 13-assertion **integration** suite over the PRD §10 acceptance criteria (one `h1`, every nav anchor, 6 roles with date ranges, 7 cards, 6 skill groups, résumé download, assembled contact address, no phone number, external links safe, About narrative length) | **Enforced**: `test:ci` runs coverage with an **80% lines threshold** for `content/**` and `core/**`, and `build:prod` calls `test:ci`, so a regression fails the production build. Thresholds live in `vitest-base.config.mts`, loaded through the builder's `runnerConfig`. Measured: **97.43% lines total** — all `content/` modules 100%, `core/obfuscate.ts` and `core/seo.service.ts` 100%, `core/theme.ts` 94.11% (the `matchMedia` branch, unreachable in jsdom without monkey-patching a global). Verified to fail at a 99% threshold. |
+| Unit | Vitest (`npm test`) | Validator accepts real data and rejects placeholders/missing entries; `SeoService` sets meta; obfuscation helper; every shared primitive renders; the timeline renders all 6 entries. Plus `pages/home/home.spec.ts` — a 13-assertion **integration** suite over the PRD §10 acceptance criteria (one `h1`, every nav anchor, 6 roles with date ranges, 6 cards, 6 skill groups, résumé download, assembled contact address, no phone number, external links safe, About narrative length) | **Enforced**: `test:ci` runs coverage with an **80% lines threshold** for `content/**` and `core/**`, and `build:prod` calls `test:ci`, so a regression fails the production build. Thresholds live in `vitest-base.config.mts`, loaded through the builder's `runnerConfig`. Measured: **97.43% lines total** — all `content/` modules 100%, `core/obfuscate.ts` and `core/seo.service.ts` 100%, `core/theme.ts` 94.11% (the `matchMedia` branch, unreachable in jsdom without monkey-patching a global). Verified to fail at a 99% threshold. |
 | Content | `scripts/validate-content.ts` | The ten rules in §5 | **Build fails** on violation |
 | A11y | axe (manual; `@axe-core/playwright` later) | The live page and the 404 page; 0 critical/serious | Phase 4 gate |
 | E2E (optional) | Playwright | Anchors scroll correctly, résumé download, mobile menu, 404 path | Phase 9 |
@@ -620,7 +620,7 @@ Always preview with a static server rather than `ng serve`: `ng serve` does not 
 2. Single page with all 7 sections plus a prerendered 404 route.
 3. Result of PLAN 1.4 recorded in TRD §4.1.
 4. Tailwind design system with tokens; light + dark; responsive 320 px → 2560 px; anchors not hidden by the sticky header.
-5. Content modules populated from `PRD.md` §8 — 6 experience entries, 7 projects, 6 skill groups, résumé PDF wired up.
+5. Content modules populated from `PRD.md` §8 — 6 experience entries, 6 projects, 6 skill groups, résumé PDF wired up.
 6. Unit tests green with ≥80% coverage on `content/` and `core/`.
 7. Accessibility and SEO requirements from §7/§8 implemented and manually verified.
 8. `scripts/deploy.sh` and `scripts/verify-deploy.sh` runnable from git-bash, with the guard from §13.1.

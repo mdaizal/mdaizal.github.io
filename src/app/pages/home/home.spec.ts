@@ -7,7 +7,7 @@ import { Home } from './home';
  *
  * These assertions are the ones a reviewer would otherwise have to check by eye
  * against the live URL, so they run in CI: one h1, every nav anchor present, all
- * six roles and all seven projects rendered, and no phone number anywhere.
+ * six roles and all six projects rendered, and no phone number anywhere.
  */
 describe('Home — single-page acceptance', () => {
   async function render(): Promise<HTMLElement> {
@@ -47,9 +47,9 @@ describe('Home — single-page acceptance', () => {
     expect(text).toContain('Trilevel');
   });
 
-  it('renders all seven project cards', async () => {
+  it('renders all six project cards', async () => {
     const el = await render();
-    expect(el.querySelectorAll('app-project-card').length).toBe(7);
+    expect(el.querySelectorAll('app-project-card').length).toBe(6);
   });
 
   it('renders all six skill groups', async () => {

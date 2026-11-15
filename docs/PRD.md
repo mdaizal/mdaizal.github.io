@@ -44,7 +44,7 @@ Hard rules. Pi must not write content that violates them; the build validator (T
 | ID | Goal | Measure of success |
 |----|------|--------------------|
 | G1 | Communicate role, depth and availability within 5 seconds | Hero carries Software Engineer, "5+ years .NET", the AWS direction and "available immediately"; no scrolling |
-| G2 | Prove the cloud claim with verifiable evidence | This site's own AWS architecture (S3 + CloudFront + OAC + IAM + OIDC) plus the public `cloud-lab` repo are linked and described |
+| G2 | Prove the cloud claim with verifiable evidence | This site's own AWS architecture (S3 + CloudFront + OAC + IAM + OIDC) is linked and described |
 | G3 | Turn 19 years of mixed history from a liability into the story | The timeline shows every role honestly; the About narrative explains the through-line (delivering and supporting systems) rather than apologising for it |
 | G4 | Let a recruiter act immediately | Email / LinkedIn / GitHub / résumé reachable in ≤1 click from anywhere on the page |
 | G5 | Demonstrate the claimed engineering through the site itself | Live Lighthouse Perf/A11y ≥ 95, SEO 100; keyboard-operable; CI-gated builds |
@@ -132,9 +132,9 @@ Sticky header: display name (scrolls to `#top`), `About / Experience / Skills / 
 ### 6.6 Projects (`#projects`)
 | Req ID | Requirement |
 |--------|-------------|
-| FR-6.1 | 7 cards, sourced only from `projects.ts`; no hardcoded project markup |
+| FR-6.1 | 6 cards, sourced only from `projects.ts`; no hardcoded project markup |
 | FR-6.2 | Each card: title, period, one-line summary, 2–5 bullets (problem → what was built → outcome), tech tags, links where they exist |
-| FR-6.3 | Cards must include: this site's AWS deployment, inventory ticketing/workflow (2 days → 20 min), the real-time internal bidding application (EF Core + SignalR), visitor management (100+/day), weighbridge/Customs compliance, workflow-engine modernisation, and `cloud-lab` |
+| FR-6.3 | Cards must include: this site's AWS deployment, inventory ticketing/workflow (2 days → 20 min), the real-time internal bidding application (EF Core + SignalR), visitor management (100+/day), weighbridge/Customs compliance, workflow-engine modernisation |
 | FR-6.4 | **This site's own card** must describe the real AWS architecture (private S3 + CloudFront + OAC, least-privilege IAM, OIDC keyless deploys) and link the repo — it is the primary AWS evidence |
 | FR-6.5 | No card may imply production AWS workload experience beyond deploying this site and learning projects |
 | FR-6.6 | If a project has no repo or live URL, omit the link — never render a dead button. The five internal systems therefore carry no links |
@@ -241,7 +241,7 @@ Bachelor of Computer Science (Computer Networking) — **Universiti Putra Malays
 
 Note: AWS and TypeScript sit at `learning` because neither has production mileage yet — this deployment and this Angular build are the first real practice. State that plainly; it is the point of the site.
 
-### Projects (`projects.ts`) — 7 cards
+### Projects (`projects.ts`) — 6 cards
 | # | Title | Period | Domain | Key content | Links |
 |---|-------|--------|--------|-------------|-------|
 | 1 | Portfolio site on AWS (this site) | 2026 | `aws` | Private S3 + CloudFront + OAC, least-privilege IAM deploy role, GitHub Actions OIDC (no stored keys), prerendered Angular 22 build, CI budget and content gates | repo |
@@ -250,7 +250,6 @@ Note: AWS and TypeScript sit at `learning` because neither has production mileag
 | 4 | Visitor Management System | Panasonic · 2022–2026 | `dotnet` | 100+ daily visitors plus logistics vehicles and scrap lorries; check-in/out records for site access control | none (internal) |
 | 5 | Scrap Weighbridge Compliance System | Panasonic · 2022–2026 | `dotnet` | Captures lorry weight before and after scrap loading and produces Customs-compliance records | none (internal) |
 | 6 | Workflow Engine Rollout / Legacy Modernisation | Panasonic · 2022–2026 | `dotnet` | REST APIs bridging legacy systems to a modern workflow engine; standardised approvals organisation-wide | none (internal) |
-| 7 | cloud-lab | ongoing | `aws` | Public learning repo — the hands-on path toward AWS certification: notes, labs and small experiments | https://github.com/mdaizal/cloud-lab |
 
 `featured: true` for 1, 2 and 3 if a featured row is used.
 

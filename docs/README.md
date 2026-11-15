@@ -29,7 +29,7 @@ Mohd Aizal Baharuddin's personal portfolio: an Angular 22 **single-page** static
 - [x] **Phase 2 — design system, content layer, primitives, app shell**
   - Tokens via CSS **`light-dark()`** + `@theme inline`; OS preference by default, `data-theme` override applied pre-boot in `main.ts` (an inline theme script would be blocked by the CSP)
   - **`scripts/check-contrast.mjs`: 24 WCAG AA pairs, 0 failures**
-  - Content from the résumé: 6 experience entries, 7 projects, 6 skill groups
+  - Content from the résumé: 6 experience entries, 6 projects, 6 skill groups
   - **Content gate as a Vitest suite**, wired into `build:prod` — verified by injection (placeholder → exit 1)
   - 6 primitives + layout shell (skip link, header, footer) with specs
   - Gates: **47 tests pass** · lint clean · build **280 kB raw / 79 kB gzip** · 2 routes prerendered
@@ -74,7 +74,7 @@ Mohd Aizal Baharuddin's personal portfolio: an Angular 22 **single-page** static
 | **5+ years of .NET development** | Trilevel (Dec 2006 – Jan 2008) + Panasonic (Jun 2022 – Oct 2026) ≈ 5.4 years. The 2006–2008 role is visible in the timeline, which reconciles this with LinkedIn's "4+ years". |
 | **19 years of professional experience** | Timeline runs 2006 → 2026; 2008–2021 in IT operations, application support and programme management (Prime Minister's Department; Ministry of Youth & Sports). |
 | **5 production enterprise systems shipped** | Inventory ticketing, real-time bidding (EF Core + SignalR), visitor management, weighbridge compliance, workflow-engine rollout. |
-| **AWS — hands-on, learning** | This site's own S3 + CloudFront + OAC + least-privilege IAM + OIDC deployment, plus the public `cloud-lab` repo. SAA certification targeted **January 2027**. |
+| **AWS — hands-on, learning** | This site's own S3 + CloudFront + OAC + least-privilege IAM + OIDC deployment. SAA certification targeted **January 2027**. |
 | **Go — learning** | Tutorial/self-study stage. First real artifact is the v2 Go Lambda contact form. **No Go proficiency claim anywhere.** |
 | Available immediately | Résumé states availability from 1 November 2026 — **confirm, since LinkedIn still shows the Panasonic role as current.** |
 
