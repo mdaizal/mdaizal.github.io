@@ -240,6 +240,13 @@ Steps as originally specified, with `{{BUCKET_NAME}}` = `aizal-portfolio-site` a
 
 **Verified after the first upload:** 11 objects, 1.28 MiB, correct `Content-Type` on every object, `max-age=0,must-revalidate` on all HTML, `immutable` on the hashed JS/CSS.
 
+**⚠️ PENDING — two items must be cleared before go-live (recorded at the Phase 6 pause):**
+
+1. **The uploaded build is now stale.** Commit `21efcb7` removed the `cloud-lab` project card (7 → 6), so the bucket holds the 7-card version while the repo now builds 6. Nothing is live yet, so this is harmless — but re-sync before CloudFront starts serving it.
+2. **The résumé cache-control fix has not been applied.** `assets/aizal-resume.pdf` is still `max-age=31536000,immutable`; it must become `max-age=3600,must-revalidate` (see the defect note above).
+
+**One re-run of the three-pass sync (TRD §13.3) clears both at once.**
+
 > **Defect caught here, and fixed.** The original two-pass sync gave `assets/aizal-resume.pdf` `immutable` for a year. The résumé URL carries **no content hash**, so an updated résumé would have been invisible to anyone who had already visited — for up to a year, in both browser and CloudFront caches. That is the one file on a job-search site that must never go stale. The deploy script now separates *hashed* filenames (safe to make immutable) from *stable* filenames whose content changes (short TTL). Found by inspecting object headers with `head-object`; `aws s3 ls` shows nothing about caching.
 
 ## Phase 7 — Deploy automation
