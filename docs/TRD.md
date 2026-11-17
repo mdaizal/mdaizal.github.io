@@ -646,4 +646,4 @@ Always preview with a static server rather than `ng serve`: `ng serve` does not 
 - [ ] Lighthouse mobile on the live URL: Perf ≥ 95, A11y ≥ 95, Best Practices ≥ 95, SEO 100.
 - [ ] Push to `main` → deployed within 5 minutes with zero AWS keys in the repo.
 - [ ] Rollback rehearsed once from a retained artifact.
-- [ ] `https://mdaizal.github.io` returns 404 (PLAN Phase 9.4).
+- [x] `https://mdaizal.github.io` serves this project (old site retired; URL kept and repurposed)

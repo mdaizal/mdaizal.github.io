@@ -276,7 +276,7 @@ None in v1. If wanted later, choose a cookieless, consent-free option and record
 - [ ] This site's own AWS card describes the real architecture, not marketing language.
 - [ ] React appears nowhere in skills.
 - [ ] Go labelled `learning`, AWS labelled `learning`, no production-AWS claim anywhere.
-- [ ] `https://mdaizal.github.io` is retired (PLAN Phase 9.4).
+- [x] `https://mdaizal.github.io` is retired as the *old* site and now serves this project (PLAN Phase 9.4)
 
 ## 11. Open questions
 
