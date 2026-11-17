@@ -48,7 +48,7 @@ import { SectionHeading } from '../../../../shared/section-heading/section-headi
               </ul>
               <p class="mt-3 text-sm">
                 <a
-                  [href]="profile.github + '/aizal-portfolio'"
+                  [href]="profile.github + '/mdaizal.github.io'"
                   [attr.target]="'_blank'"
                   rel="noopener noreferrer"
                   class="text-accent underline underline-offset-4"

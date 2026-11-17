@@ -25,7 +25,7 @@ export const PROJECTS: readonly Project[] = [
     tags: ['AWS', 'S3', 'CloudFront', 'IAM', 'OIDC', 'Angular', 'GitHub Actions'],
     domain: 'aws',
     featured: true,
-    repoUrl: 'https://github.com/mdaizal/aizal-portfolio',
+    repoUrl: 'https://github.com/mdaizal/mdaizal.github.io',
   },
   {
     slug: 'inventory-transfer-ticketing',

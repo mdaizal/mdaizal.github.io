@@ -38,11 +38,11 @@ describe('ProjectCard', () => {
     const el = await render({
       ...INTERNAL_PROJECT,
       slug: 'portfolio-site-aws',
-      repoUrl: 'https://github.com/mdaizal/aizal-portfolio',
+      repoUrl: 'https://github.com/mdaizal/mdaizal.github.io',
     });
     const links = el.querySelectorAll('a');
     expect(links.length).toBe(1);
-    expect(links[0].getAttribute('href')).toBe('https://github.com/mdaizal/aizal-portfolio');
+    expect(links[0].getAttribute('href')).toBe('https://github.com/mdaizal/mdaizal.github.io');
     expect(links[0].getAttribute('rel')).toBe('noopener noreferrer');
   });
 });
