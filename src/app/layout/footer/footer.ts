@@ -59,8 +59,8 @@ import { emailAddress, mailtoHref } from '../../core/obfuscate';
         </div>
 
         <p class="mt-8 border-t border-border pt-6 text-xs text-ink-muted">
-          Angular 22, prerendered at build time, served from a private S3 bucket behind CloudFront with
-          least-privilege, keyless CI.
+          Angular 22, prerendered at build time, served by AWS Amplify Hosting with a strict CSP and
+          published from the AWS CLI using short-lived credentials.
         </p>
       </div>
     </footer>
