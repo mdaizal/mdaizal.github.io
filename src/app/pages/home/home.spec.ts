@@ -106,8 +106,8 @@ describe('Home — single-page acceptance', () => {
   it('documents how the site itself is built (FR-3.4)', () => {
     const text = HOW_THIS_SITE_IS_BUILT.join(' ');
     expect(HOW_THIS_SITE_IS_BUILT.length).toBeGreaterThanOrEqual(3);
-    expect(text).toMatch(/CloudFront/);
-    expect(text).toMatch(/OIDC/);
-    expect(text).toMatch(/S3/);
+    expect(text).toMatch(/Amplify/);
+    expect(text).toMatch(/AWS CLI/);
+    expect(text).toMatch(/CSP/);
   });
 });
