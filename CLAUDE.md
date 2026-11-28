@@ -60,12 +60,31 @@ Neither may be loosened to get a build through.
 
 ## Hosting state
 
-The target is private S3 + CloudFront (PLAN Phases 5–7; the owner runs every AWS command).
-Until AWS verification clears, the site is live on **GitHub Pages at https://mdaizal.github.io**,
-served from the `gh-pages` branch, which holds built output only. Republishing means
-`npm run build:prod`, then copying `dist/portfolio/browser/` into `gh-pages` with a root
-`404.html` copy of `404/index.html` and a `.nojekyll`. See PLAN §9 "Interim hosting". There is
-no `.github/workflows/` yet: the token lacks the `workflow` scope.
+The site is live on **AWS Amplify Hosting at https://main.d1hdxafvdzhpo8.amplifyapp.com**
+(app `d1hdxafvdzhpo8`, branch `main`, `ap-southeast-2`, AWS CLI profile `aws-agent`). It is a
+manual deployment, so there is no connected repository and no Amplify build. The planned private
+S3 + CloudFront design (PLAN Phases 5–7) is on hold. The earlier GitHub Pages host
+(`gh-pages` branch, https://mdaizal.github.io) is superseded.
+
+Republishing, in order:
+
+1. `git fetch` and sync with `origin/main` first. Building from a stale clone once shipped
+   broken styling.
+2. `npm run build:prod`, then confirm `dist/portfolio/browser/index.html` has **no**
+   `media="print"`. The Amplify CSP (`script-src 'self'`) blocks Angular's critical-CSS swap,
+   which is why `angular.json` sets `inlineCritical: false`. Keep it that way.
+3. Zip the *contents* of `dist/portfolio/browser/` with forward-slash paths:
+   `C:\Windows\System32\tar.exe -a -cf portfolio.zip *` run from inside that directory.
+   Do not use `Compress-Archive`, which writes backslash paths.
+4. `aws amplify create-deployment --app-id d1hdxafvdzhpo8 --branch-name main` (read the JSON
+   output), `PUT` the zip to `zipUploadUrl`, then `aws amplify start-deployment` with the
+   returned `jobId`. Only one deployment can be pending at a time. Clear a stuck one with
+   `aws amplify stop-job`.
+5. Verify on the live URL, not a local server: a local preview has no CSP, so it cannot catch
+   styling the CSP blocks.
+
+Security headers (HSTS, CSP, nosniff, cache rules) are Amplify app custom headers, not files
+in this repo. There is no `.github/workflows/` yet: the token lacks the `workflow` scope.
 
 The `docs/` files still give the project root as `E:\Go Projects\portfolio-site\`. The repo now
 lives here, renamed to `mdaizal.github.io`.
