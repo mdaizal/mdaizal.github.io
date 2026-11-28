@@ -29,6 +29,25 @@ export const PROJECTS: readonly Project[] = [
     repoUrl: 'https://github.com/mdaizal/mdaizal.github.io',
   },
   {
+    slug: 'dam-haji-game',
+    title: 'Dam Haji — Malay checkers in the browser',
+    period: '2026',
+    summary:
+      'A browser version of the traditional Malaysian board game, published as a static site on a private S3 bucket behind CloudFront.',
+    bullets: [
+      'Plays on a 12 × 12 classic board or an 8 × 8 standard board, against a second player or a computer opponent.',
+      'The computer opponent uses Minimax search with alpha-beta pruning, at three difficulty levels.',
+      'Implements the traditional Saman penalty rule alongside forced and multi-jump captures.',
+      'Plain HTML, CSS and JavaScript with no build step; sound effects are synthesised with the Web Audio API rather than loaded from files.',
+      'Infrastructure is one CloudFormation stack: a private, encrypted S3 bucket that only the CloudFront distribution can read through an Origin Access Control, with HTTPS enforced.',
+      'Built with AI-assisted development tools.',
+    ],
+    tags: ['JavaScript', 'AWS', 'S3', 'CloudFront', 'CloudFormation'],
+    domain: 'aws',
+    repoUrl: 'https://github.com/mdaizal/dam-haji-game',
+    liveUrl: 'https://dhhwhs5isbr2n.cloudfront.net/',
+  },
+  {
     slug: 'inventory-transfer-ticketing',
     title: 'Inventory Transfer Ticketing & Workflow Approval',
     period: 'Panasonic · 2022–2026',
